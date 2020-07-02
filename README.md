@@ -1,5 +1,5 @@
 # graphql-uptime
-Test GraphQL API uptime with Asserted
+Local example GraphQL API uptime test with Asserted
 
 ![asserted.io](https://raw.githubusercontent.com/assertedio/graphql-uptime/master/images/logo.png)
 
