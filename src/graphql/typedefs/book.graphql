@@ -7,22 +7,19 @@ type Book {
 
 type Query {
     books: [Book!]!
-    book(id: ID!): Book!
+    book(id: ID!): Book
 }
 
 type Mutation {
     createBook(book: BookInput!): Book!
     updateBook(bookId: ID!, book: BookInput!): Book!
+    deleteBook(bookId: ID!): Boolean
     setBookAuthors(bookId: ID!, authorIds: [ID!]): Book!
 }
 
 input BookInput {
     name: String!
     publisherId: ID!
-}
-
-type Subscription {
-    bookMutated: BookMutationPayload!
 }
 
 type BookMutationPayload {

@@ -47,7 +47,7 @@ const publishers = [
   },
 ];
 
-const books = [
+let books = [
   {
     id: 'design-patterns',
     name: 'Design Patterns - Elements of Reusable Object-Oriented Software',
@@ -204,6 +204,11 @@ export class BookService extends DataSource {
 
   getBook(id) {
     return Promise.resolve(findBook(id));
+  }
+
+  deleteBook(id) {
+    books = books.filter(({ id: _id }) => id !== _id);
+    return Promise.resolve();
   }
 
   getBookPublisher(bookId) {

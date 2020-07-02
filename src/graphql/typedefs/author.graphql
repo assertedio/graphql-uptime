@@ -14,10 +14,6 @@ type Mutation {
     updateAuthor(authorId: ID!, name: String!): Author!
 }
 
-type Subscription {
-    authorMutated: AuthorMutationPayload!
-}
-
 type AuthorMutationPayload {
     mutation: MutationType!
     node: Author!

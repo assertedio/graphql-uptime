@@ -5,3 +5,4 @@ coverage/**
 scratch.ts
 dist/
 src/lib/services/templates/*
+!.asserted/

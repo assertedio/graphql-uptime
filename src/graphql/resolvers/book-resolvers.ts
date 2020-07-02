@@ -1,20 +1,4 @@
 import { dataSources } from '../../datasources';
-import { pubsub } from '../pubsub';
-
-const BOOK_MUTATED = 'bookMutated';
-
-/**
- * @param book
- */
-function publishBookUpdated(book) {
-  pubsub.publish(BOOK_MUTATED, {
-    bookMutated: {
-      mutation: 'UPDATED',
-      node: book,
-    },
-  });
-  return book;
-}
 
 export default {
   Query: {
@@ -29,43 +13,28 @@ export default {
   Mutation: {
     createBook(parent, args) {
       const { publisherId, ...rest } = args.book;
-      return dataSources.bookService
-        .createBook(
-          {
-            ...rest,
-          },
-          publisherId
-        )
-        .then((book) => {
-          pubsub.publish(BOOK_MUTATED, {
-            bookMutated: {
-              mutation: 'CREATED',
-              node: book,
-            },
-          });
-          return book;
-        });
+      return dataSources.bookService.createBook(
+        {
+          ...rest,
+        },
+        publisherId
+      );
     },
     updateBook(parent, args) {
       const { publisherId, ...rest } = args.book;
-      return dataSources.bookService
-        .updateBook(
-          args.bookId,
-          {
-            ...rest,
-          },
-          publisherId
-        )
-        .then(publishBookUpdated);
+      return dataSources.bookService.updateBook(
+        args.bookId,
+        {
+          ...rest,
+        },
+        publisherId
+      );
+    },
+    deleteBook(parent, args) {
+      return dataSources.bookService.deleteBook(args.bookId);
     },
     setBookAuthors(parent, args) {
-      return dataSources.bookService.setBookAuthors(args.bookId, args.authorIds).then(publishBookUpdated);
-    },
-  },
-
-  Subscription: {
-    bookMutated: {
-      subscribe: () => pubsub.asyncIterator(BOOK_MUTATED),
+      return dataSources.bookService.setBookAuthors(args.bookId, args.authorIds);
     },
   },
 
