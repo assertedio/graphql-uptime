@@ -11,6 +11,10 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "files": [
+    "src",
+    "images"
+  ],
   "dependencies": {
     "apollo-datasource": "^0.6.1",
     "apollo-server": "^2.7.2",
@@ -50,7 +54,17 @@
     "asserted",
     "graphql",
     "test",
-    "uptime"
+    "uptime",
+    "monitoring",
+    "apollo server",
+    "health check",
+    "health",
+    "integration",
+    "integration testing",
+    "mocha",
+    "chai",
+    "typescript",
+    "example"
   ],
   "license": "MIT",
   "lint-staged": {
@@ -62,7 +76,7 @@
       "eslint --fix"
     ]
   },
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/assertedio/graphql-uptime.git"
